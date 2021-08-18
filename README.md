@@ -55,7 +55,7 @@ void video_blit_bmp(const rect_t dst, const rect_t src, const color_t *data);
 
 ### Notas 
 
-si hay dudas con algo, siempre se puede hacer un archivo c/c++, python y compilar en la pc *no qemu, virtualbox...*, para probar, tambien se puede desabilitar `main.c` desde `kernel.c`, poner algun `sleep(10000000);` y sino ultimadamente usar gdb q de todas formas somos espertos. 
+si hay dudas con algo, siempre se puede hacer un archivo c/c++, python y compilar en la pc *no qemu, virtualbox...*, para probar, tambien se puede desabilitar `main.c` desde `kernel.c`, poner algun `sleep(10000000);` y sino ultimadamente usar gdb q de todas formas somos expertos. 
 
 **cada vez q se llama a `video_refresh()` borra todos los `printf`**
 
