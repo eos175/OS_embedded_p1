@@ -2,12 +2,13 @@
 
 
 #include <stdint.h>
+#include <trig8.h>
 
 /*
 
 https://gist.github.com/orlp/1501b5faa56b592683d5
 
-*/
+
 
 
 static inline double sin(double x) {
@@ -40,3 +41,4 @@ static inline double cos(double x) {
     return sin(x + pi_2);
 }
 
+*/

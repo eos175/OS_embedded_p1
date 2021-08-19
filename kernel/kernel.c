@@ -202,11 +202,11 @@ void _start(struct stivale2_struct *stivale2_struct) {
     char buf[64] = {0};
     size_t size = strlen(tmp);
     memcpy(buf, tmp, size);
-    printf("\n%d << %d | %s\n", (int)(cos(45) * 100), size, buf);
+    printf("\n%d << %d | %s\n", (int)(cos16(45) * 100), size, buf);
 
     for (size_t i = 0; i < 100; i++)
     {
-        printf("%d ", randint(0, 10));
+        printf("%d ", sin16(randint(0, 65500)));
     }
     printf("\n\n");
 

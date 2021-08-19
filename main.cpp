@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "tmp.h"
+#include "kernel/include/trig8.h"
 
 
 namespace std {
@@ -83,8 +84,16 @@ int main(int argc, char const *argv[])
     PrintArr<int>(buf, size);
 
     //size = rle_decode<int>(buf2, buf, size);
+    size = 45;
 
-    printf("\n%d || %.9f | %.9f | %.9f\n", size, cos(size), fast_cos(size), cos2<double>(size));
+    printf("\n%d || %d | %.9f | %.9f | %.9f\n", size, sin16(size), cos(size), fast_cos(size), cos2<double>(size));
+
+    for (size_t i = 0; i < 255; i+=1)
+    {
+        printf("sin8(%ld)=%d\n", i, sin8(i));
+    }
+    
+
     return 0;
 }
 
