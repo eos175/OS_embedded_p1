@@ -2,6 +2,12 @@
     "files.associations": {
         "*.cpp": "cpp",
         "video.h": "c",
-        "limits": "cpp"
+        "limits": "cpp",
+        "float.h": "c",
+        "atomic": "cpp",
+        "cstdint": "cpp",
+        "cmath": "cpp",
+        "input.h": "c",
+        "kbd.h": "c"
     }
 }

@@ -5,6 +5,9 @@ CC = gcc
 LD = ld
 AS = nasm
 
+
+## https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gcc/Optimize-Options.html
+
 CXXFLAGS = -fno-builtin \
             -nostdlib \
             -fno-rtti \
@@ -13,7 +16,7 @@ CXXFLAGS = -fno-builtin \
 
 ASFLAGS = -f elf64 -O2
 
-CFLAGS = -Wall -Wextra -O0 -pipe \
+CFLAGS = -O1 -pipe \
 	-mcmodel=kernel
 
 
@@ -37,9 +40,9 @@ INTERNALCFLAGS  :=       \
 	-mno-80387           \
 	-mno-mmx             \
 	-mno-3dnow           \
-	-mno-sse             \
-	-mno-sse2            \
-	-mno-red-zone
+	-mno-red-zone	\
+	-ffast-math
+
 
 CPPFILES := $(shell find ./ -type f -name '*.cpp')
 CFILES := $(shell find ./ -type f -name '*.c')

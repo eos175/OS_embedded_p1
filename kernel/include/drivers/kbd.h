@@ -1,5 +1,4 @@
-#ifndef __KBD_H__
-#define __KBD_H__
+#pragma once
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -230,4 +229,3 @@ char getchar();
 void getline(char *string, int len);
 int init_kbd();
 
-#endif

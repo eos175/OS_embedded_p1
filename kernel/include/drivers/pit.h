@@ -1,7 +1,14 @@
-#ifndef __PIT_H__
-#define __PIT_H__
+#pragma once
 
-void sleep(int ticks);
-int init_pit();
+#include <stdint.h>
 
-#endif
+
+static inline void sleep(uint64_t ms) {
+    ms <<= 12;
+
+    for (uint64_t i = 0; i < ms; i++)
+    {
+        asm volatile ("nop;nop;nop");
+    }
+    
+}

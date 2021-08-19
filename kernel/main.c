@@ -37,7 +37,7 @@ void move(void *s)
 
 
 const int BALL_SPEED = 1;
-const int PLAYER_SPEED = 2;
+const int PLAYER_SPEED = 1;
 
 
 

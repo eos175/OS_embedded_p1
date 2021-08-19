@@ -1,16 +1,7 @@
-#pragma once
-
-
 #include <stdint.h>
 
-/*
 
-https://gist.github.com/orlp/1501b5faa56b592683d5
-
-*/
-
-
-static inline double sin(double x) {
+static inline double fast_sin(double x) {
     // Polynomial constants generated with sollya.
     // fpminimax(sin(x), [|1,3,5,7|], [|D...|], [-pi/2;pi/2]);
     // Both relative and absolute error is 9.39e-7.
@@ -35,8 +26,24 @@ static inline double sin(double x) {
 }
 
 
-static inline double cos(double x) {
+static inline double fast_cos(double x) {
     const double pi_2 =  1.57079632679489661923132169163975144;
-    return sin(x + pi_2);
+    return fast_sin(x + pi_2);
+}
+
+
+#define EXTRA_PRECISION     1
+
+template<typename T>
+inline T cos2(T x) noexcept
+{
+    constexpr T tp = 1./(2.*M_PI);
+    x *= tp;
+    x -= T(.25) + std::floor(x + T(.25));
+    x *= T(16.) * (std::abs(x) - T(.5));
+    #if EXTRA_PRECISION
+    x += T(.225) * x * (std::abs(x) - T(1.));
+    #endif
+    return x;
 }
 

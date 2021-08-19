@@ -2,7 +2,6 @@
 
 #include <drivers/kbd.h>
 #include <stdbool.h>
-#include <drivers/pit.h>
 
 
 
@@ -33,22 +32,7 @@ typedef enum {
 
 static inline Input input_read() 
 {
-    static Input key;
-    static int k;
-
-    /*
-    
-    */
-
-
-    k++;
-    if (k < 5) {
-        
-        sleep(1);
-        
-        return key;
-    }
-    
+    Input key;
 
     // TODO(eos175) esto se puede mejorar, cambiar por una tabla...
     
@@ -59,7 +43,7 @@ static inline Input input_read()
     key.left    = tmp == KKEY_LEFT;
     key.right   = tmp == KKEY_RIGHT;
 
-    k = 0;
+  
 
     return key;
 

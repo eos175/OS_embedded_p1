@@ -31,14 +31,14 @@ static inline int pixel_index(uint x, uint y)
 
 static inline void set_pixel(uint x, uint y, color_t color)
 {
-    if (x < width && y < height) {  // proteccion ante errores de produ...
+    if (x < (uint)width && y < (uint)height) {  // proteccion ante errores de produ...
         buffer[pixel_index(x, y)] = color;
     }
 }
 
 static inline color_t get_pixel(uint x, uint y)
 {
-    return (x < width && y < height) ? buffer[pixel_index(x, y)] : 0;
+    return (x < (uint)width && y < (uint)height) ? buffer[pixel_index(x, y)] : 0;
 }
 
 

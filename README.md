@@ -36,9 +36,13 @@ las imagenes se embeben ***(buscar el termino correcto para embeben)*** en el co
 los bmp se puede comprimir usando [RLC Encoding](https://es.wikipedia.org/wiki/Run-length_encoding) hay una implemtacion ya escrita para esto, buscar mirar `main.c / files.h` sin embargo no es obligatorio, solo para reducir el binario, q visual ande mejor....
 
 
-rutinas de video de alto nivel **(agregar ejemplos y doc de esto)**
+### rutinas de alto nivel
+
+ **(agregar ejemplos y doc de esto)**
 
 **queria pasar elto a camel case Video_FillRect...** pero sera luego :(
+
+#### Video
 
 ```c++
 void video_refresh();
@@ -52,12 +56,22 @@ void video_draw_bmp(const rect_t rect, const color_t *data);
 void video_blit_bmp(const rect_t dst, const rect_t src, const color_t *data);
 ```
 
+#### Random
+
+```c++
+int64_t randint(int64_t a, int64_t b); // randint(0, 10) -> 0 .. 10
+```
 
 ### Notas 
 
 si hay dudas con algo, siempre se puede hacer un archivo c/c++, python y compilar en la pc *no qemu, virtualbox...*, para probar, tambien se puede desabilitar `main.c` desde `kernel.c`, poner algun `sleep(10000000);` y sino ultimadamente usar gdb q de todas formas somos expertos. 
 
 **cada vez q se llama a `video_refresh()` borra todos los `printf`**
+
+- como generador pseudo aleatorio se va usar [MTwister](https://github.com/ESultanik/mtwister)
+
+
+
 
 
 ### Referencia
@@ -80,4 +94,6 @@ https://github.com/cfenollosa/os-tutorial
 https://cs.lmu.edu/~ray/notes/nasmtutorial/
 
 https://github.com/mpaland/printf
+
+https://github.com/ESultanik/mtwister
 

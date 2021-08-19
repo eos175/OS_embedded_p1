@@ -1,6 +1,10 @@
 #include <iostream>
 #include <limits>
 
+#include <cmath>
+
+#include "tmp.h"
+
 
 namespace std {
 
@@ -78,9 +82,9 @@ int main(int argc, char const *argv[])
 
     PrintArr<int>(buf, size);
 
-    size = rle_decode<int>(buf2, buf, size);
+    //size = rle_decode<int>(buf2, buf, size);
 
-    printf("\n%d\n", size);
+    printf("\n%d || %.9f | %.9f | %.9f\n", size, cos(size), fast_cos(size), cos2<double>(size));
     return 0;
 }
 

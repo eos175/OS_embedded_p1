@@ -7,18 +7,13 @@
 #include <string.h>
 
 
+#include <math.h>
+#include <random.h>
 #include <video.h>
 #include <collision.h>
 
-#include <files.h> // mi imagen
-
-
 #include <drivers/kbd.h>
 #include <drivers/pit.h>
-#include <kernel/gdt.h>
-#include <kernel/idt.h>
-#include <kernel/irq.h>
-#include <kernel/isr.h>
 
 
 
@@ -88,8 +83,8 @@ static struct stivale2_header_tag_framebuffer framebuffer_hdr_tag = {
     .framebuffer_bpp    = 0
     */
 
-    .framebuffer_width  = 1024,
-    .framebuffer_height = 768,
+    .framebuffer_width  = width,
+    .framebuffer_height = height,
     .framebuffer_bpp    = 32
 
 };
@@ -146,8 +141,8 @@ void _start(struct stivale2_struct *stivale2_struct) {
 
 
     // Let's get the terminal structure tag from the bootloader.
-    struct stivale2_struct_tag_terminal *term_str_tag;
-    term_str_tag = stivale2_get_tag(stivale2_struct, STIVALE2_STRUCT_TAG_TERMINAL_ID);
+    struct stivale2_struct_tag_terminal *term_str_tag = stivale2_get_tag(
+        stivale2_struct, STIVALE2_STRUCT_TAG_TERMINAL_ID);
 
     // Check if the tag was actually found.
     if (term_str_tag == NULL) {
@@ -167,10 +162,26 @@ void _start(struct stivale2_struct *stivale2_struct) {
 
     // We should now be able to call the above function pointer to print out
     // a simple "Hello World" to screen.
-    term_write("Hello World\n", 12);
+    // term_write("Hello World\n", 12);
 
 
     // TODO(eos175)
+
+    init_printf(term_write_ptr);
+
+    struct stivale2_struct_tag_epoch *epoch_str_tag = stivale2_get_tag(
+        stivale2_struct, STIVALE2_STRUCT_TAG_EPOCH_ID);
+    
+    if (epoch_str_tag == NULL) {
+        // It wasn't found, just hang...
+        for (;;) {
+            asm ("hlt");
+        }
+    }
+
+    random_init(epoch_str_tag->epoch);
+    printf("[random init] seed=%d\n", epoch_str_tag->epoch);
+
 
     /*
 
@@ -185,13 +196,20 @@ void _start(struct stivale2_struct *stivale2_struct) {
 
     */
 
-    init_printf(term_write_ptr);
+    
 
     const char *tmp = "Hola todo esta listo...\n\n";
     char buf[64] = {0};
     size_t size = strlen(tmp);
     memcpy(buf, tmp, size);
-    printf("\n%d | %s\n", size, buf);
+    printf("\n%d << %d | %s\n", (int)(cos(45) * 100), size, buf);
+
+    for (size_t i = 0; i < 100; i++)
+    {
+        printf("%d ", randint(0, 10));
+    }
+    printf("\n\n");
+
 
 
     // obteniendo video
@@ -208,7 +226,7 @@ void _start(struct stivale2_struct *stivale2_struct) {
     }
 
     video_init(frame_str_tag);
-    sleep(1000000);
+    sleep(3000000);
 
 #if (MAIN > 0)
     main(0, NULL);

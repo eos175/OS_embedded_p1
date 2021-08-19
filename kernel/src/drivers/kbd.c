@@ -1,7 +1,5 @@
 #include <asm.h>
 #include <drivers/kbd.h>
-// #include <fb/fb.h>
-#include <kernel/irq.h>
 
 int _kkybrd_scancode_std[] = {
 
@@ -109,12 +107,16 @@ void kbd_enc_send_cmd(uint8_t cmd) {
   outb(KBD_ENC_CMD_REG, cmd);
 }
 
+/*
+
 void kbd_handler() { kbd_ctrl_read_status(); }
 
 int init_kbd() {
   irq_install_handler(1, kbd_handler);
   return 0;
 }
+
+*/
 
 void getline(char *string, int len) {
   char temp = 0;
@@ -148,19 +150,31 @@ char getchar() {
 }
 
 
+/*
+
+http://kernelx.weebly.com/getting-keyboard-input.html
+
+*/
 
 int getkey() {
-  int key = 0;
 
-  for (size_t i = 0; (i < 10000 || 0); i++) {
-    if (kbd_ctrl_read_status() & KBD_CTRL_STATS_MASK_OUT_BUF) {
-      uint8_t code = kbd_enc_read_buf();
-      if (code <= 0x58) {
-        key = _kkybrd_scancode_std[code];
-        break;
-      }
+  const int sleep = 700;
+
+  int key = 0;
+  
+  size_t i;
+  for (i = 0; i < sleep; i++) {
+    uint8_t code = kbd_enc_read_buf();
+    if (code <= 0x58) {
+      key = _kkybrd_scancode_std[code];
+      break;
     }
+  }
+
+  for (; i < sleep; i++) {
+    uint8_t code = kbd_enc_read_buf();
   }
 
   return key;
 }
+

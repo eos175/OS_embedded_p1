@@ -41,6 +41,9 @@ extern "C" {
 #endif
 
 
+#define PRINTF_DISABLE_SUPPORT_FLOAT
+
+
 /**
  * Output a character to a custom device like UART, used by the printf() function
  * This function is declared here only. You have to write your custom implementation somewhere
