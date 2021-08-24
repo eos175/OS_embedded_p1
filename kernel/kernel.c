@@ -136,6 +136,10 @@ void *stivale2_get_tag(struct stivale2_struct *stivale2_struct, uint64_t id) {
     }
 }
 
+
+
+
+
 // The following will be our kernel's entry point.
 void _start(struct stivale2_struct *stivale2_struct) {
 
@@ -180,7 +184,7 @@ void _start(struct stivale2_struct *stivale2_struct) {
     }
 
     random_init(epoch_str_tag->epoch);
-    printf("[random init] seed=%d\n", epoch_str_tag->epoch);
+    //printf("[random init] seed=%d\n", epoch_str_tag->epoch);
 
 
     /*
@@ -197,7 +201,7 @@ void _start(struct stivale2_struct *stivale2_struct) {
     */
 
     
-
+    /*
     const char *tmp = "Hola todo esta listo...\n\n";
     char buf[64] = {0};
     size_t size = strlen(tmp);
@@ -210,7 +214,7 @@ void _start(struct stivale2_struct *stivale2_struct) {
     }
     printf("\n\n");
 
-
+    */
 
     // obteniendo video
 
@@ -226,7 +230,7 @@ void _start(struct stivale2_struct *stivale2_struct) {
     }
 
     video_init(frame_str_tag);
-    sleep(3000000);
+    //sleep(3000000);
 
 #if (MAIN > 0)
     main(0, NULL);

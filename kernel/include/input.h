@@ -7,7 +7,7 @@
 
 typedef struct 
 {
-    bool up, down, left, right, a, b, select, start;
+    bool up, down, left, right, a, b, select, start, space, enter;
 } Input;
 
 
@@ -42,9 +42,9 @@ static inline Input input_read()
     key.up      = tmp == KKEY_UP;
     key.left    = tmp == KKEY_LEFT;
     key.right   = tmp == KKEY_RIGHT;
-
-  
-
+    key.a       = tmp == KKEY_A;
+    key.space   = tmp == KKEY_SPACE;
+    key.enter   = tmp == KKEY_ENTER;
     return key;
 
 }

@@ -16,8 +16,8 @@ typedef struct
 } vec2_t;
 
 
-static const int width = 1024;
-static const int height = 768;
+static const int width = 640;
+static const int height = 480;
 
 
 int video_init(struct stivale2_struct_tag_framebuffer *frame_str_tag);

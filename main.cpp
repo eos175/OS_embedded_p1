@@ -71,6 +71,29 @@ void PrintArr(const void *arr1, size_t len)
     printf("]\n");
 }
 
+
+int64_t abs(int64_t a)
+{
+    if (a < 0)
+        return -a;
+    return a;
+}
+
+static bool check_margin(int *arr, int size, int value, int eps)
+{
+    for (int i = 0; i < size; i++)
+    {
+        int tmp = arr[i];
+        if ((abs(tmp - value) - 1 ) < eps)
+        {
+            return true;
+        }
+        
+    }
+    return false;  
+}
+
+
 int buf[1024 * 1024] = {};
 int buf2[1024 * 1024] = {};
 
@@ -92,6 +115,8 @@ int main(int argc, char const *argv[])
     {
         printf("sin8(%ld)=%d\n", i, sin8(i));
     }
+    
+    
     
 
     return 0;

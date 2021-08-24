@@ -17,9 +17,9 @@ typedef int_fast16_t 	uint16;
 typedef uint_fast16_t 	int16;
 
 
-const uint8 PI8 = 127;
+static const uint8 PI8 = 127;
 
-const uint16 PI16 = 32768;
+static const uint16 PI16 = 32768;
 
 
 static inline uint8_t sin8(uint8 theta) 
