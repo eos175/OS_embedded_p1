@@ -83,7 +83,7 @@ void video_refresh()
     
     const size_t size = (width * height * sizeof(uint32_t)) / sizeof(uint64_t);
     
-    /**/
+    /*
     static int k = 5;
     
     k++;
@@ -92,7 +92,7 @@ void video_refresh()
         return;
     }
     k = 0;
-    
+    */
 
     memcpy64(frame_buffer, buffer, size); // video_draw()
     memset64(buffer, 0, size); // video_reset()
@@ -147,6 +147,7 @@ void video_draw_bmp(const rect_t rect, const color_t *data)
         for (int y = 0; y < h; y++) {
             int i = pixel_index2(x, y, w);
             int color = data[i];
+            if (color == 0) continue;
             int tx = rect.x + x;
             int ty = rect.y + y;
             set_pixel(tx, ty, color);

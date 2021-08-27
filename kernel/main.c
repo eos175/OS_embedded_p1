@@ -195,10 +195,10 @@ int main(int argc, char const *argv[])
     
     rect_t player_src = {0, 0, 50, 50};
     rect_t enemy_src = {0,50,50,50};
-    Player player_dst = {{width/2, height - 55}, {0, 0}, {width/2,height/2, 50, 50}, 3};
+    Player player = {{width/2, height - 55}, {0, 0}, {width/2,height/2, 50, 50}, 3};
     rect_t rect1 = {140, 150, 360, 180};
 
-    //player_dst.health = 3;
+    //player.health = 3;
     rect_t beginning = {0,0,640,480};
     rect_t stage_1 = {0,480,640,480};
     rect_t stage_2 = {0,960,640,480};
@@ -268,8 +268,8 @@ int main(int argc, char const *argv[])
     //set the health of the bullets
     for (int i = 0; i < MAX_BULLETS; i++)
     {
-        bullets[i].pos.x = player_dst.pos.x;
-        bullets[i].pos.y = player_dst.pos.y;
+        bullets[i].pos.x = player.pos.x;
+        bullets[i].pos.y = player.pos.y;
         bullets[i].vel.x = 0;
         bullets[i].vel.y = -BULLET_SPEED;
         bullets[i].health = 0;
@@ -283,7 +283,7 @@ int main(int argc, char const *argv[])
     
     video_refresh();
 
-    //int tmp = player_dst.health;;
+    //int tmp = player.health;;
     sleep(100);
     int state_0 = 1;
     int state_1 = 0;
@@ -308,13 +308,13 @@ int main(int argc, char const *argv[])
                 state_1 = 1;
                 state_0 = 0;
                 state_game_over = 0;
-                player_dst.health = 3;
-                Player player_dst = {{width/2, height - 55}, {0, 0}, {width/2,height/2, 50, 50}, 3};
+                player.health = 3;
+                Player player = {{width/2, height - 55}, {0, 0}, {width/2,height/2, 50, 50}, 3};
                 score = 0;
 
                 //walls_init();
                 //init the values for level 1
-                walls_init(walls, &player_dst);
+                walls_init(walls, &player);
 
                 for (int i = 0; i < MAX_ENEMYS; i++)
                 {
@@ -324,8 +324,8 @@ int main(int argc, char const *argv[])
                 //set the health of the bullets
                 for (int i = 0; i < MAX_BULLETS; i++)
                 {
-                    bullets[i].pos.x = player_dst.pos.x;
-                    bullets[i].pos.y = player_dst.pos.y;
+                    bullets[i].pos.x = player.pos.x;
+                    bullets[i].pos.y = player.pos.y;
                     bullets[i].vel.x = 0;
                     bullets[i].vel.y = -BULLET_SPEED;
                     bullets[i].health = 0;
@@ -582,8 +582,8 @@ int main(int argc, char const *argv[])
                
                 
 
-                player_dst.pos.x = width/2;
-                player_dst.pos.y = height - 55;
+                player.pos.x = width/2;
+                player.pos.y = height - 55;
                 
 
                 draw_stage_1 = 1;
@@ -600,19 +600,19 @@ int main(int argc, char const *argv[])
         {
             
             if (key.up) {
-                player_dst.vel.y = -PLAYER_SPEED;
+                player.vel.y = -PLAYER_SPEED;
             } else if (key.down) {
-                player_dst.vel.y = PLAYER_SPEED;
+                player.vel.y = PLAYER_SPEED;
             } else {
-                player_dst.vel.y = 0;
+                player.vel.y = 0;
             }
             
             if (key.right) {
-                player_dst.vel.x = PLAYER_SPEED;
+                player.vel.x = PLAYER_SPEED;
             } else if (key.left) {
-                player_dst.vel.x = -PLAYER_SPEED;
+                player.vel.x = -PLAYER_SPEED;
             } else {
-                player_dst.vel.x = 0;
+                player.vel.x = 0;
             }
 
             
@@ -629,7 +629,7 @@ int main(int argc, char const *argv[])
                 if (draw_stage_1)
                 {
                     video_blit_bmp(dst, stage_1, transition_data);
-                    player_dst.health = 3;
+                    player.health = 3;
                     if (key.right)
                     {
                         draw_stage_1 = 0;
@@ -637,7 +637,7 @@ int main(int argc, char const *argv[])
                     
                 }
                 
-                if (player_dst.health == 0)
+                if (player.health == 0)
                 {
                     state_game_over = 1;
                     state_2 = 0;
@@ -686,16 +686,16 @@ int main(int argc, char const *argv[])
                             enemys[i].vel.y  = 0;
                             enemys[i].health = 0;
                             move(&enemys[i]);
-                            player_dst.health--;
+                            player.health--;
                         } 
-                        if (check_collision(enemys[i].rect, player_dst.rect))
+                        if (check_collision(enemys[i].rect, player.rect))
                         {
                             enemys[i].pos.x  = width + width/2;
                             enemys[i].pos.y  = height/2;
                             enemys[i].vel.y  = 0;
                             enemys[i].health = 0;
                             move(&enemys[i]);
-                            player_dst.health--;
+                            player.health--;
                         }
                         
                     }
@@ -716,7 +716,7 @@ int main(int argc, char const *argv[])
                             if (bullets[i].health == 0)
                             {
                                 //set the values for the bullets
-                                init_bullets(&bullets[i], &player_dst);  
+                                init_bullets(&bullets[i], &player);  
                                 k = 0;
                                 
                                 break;
@@ -748,7 +748,7 @@ int main(int argc, char const *argv[])
                                 bullets[i].health = 0;
 
                                 move(&enemys[e]);
-                                if (score >= 74)
+                                if (score >= 10)
                                 {
                                     state_2 = 0;
                                     state_3 = 1;
@@ -769,15 +769,15 @@ int main(int argc, char const *argv[])
                     move(&walls[i]);
                     video_fill_rect(walls[i].rect, 0x009B9B9B);
 
-                    if (check_collision(walls[i].rect, player_dst.rect))
+                    if (check_collision(walls[i].rect, player.rect))
                     {
-                        if (walls[i].rect.x > player_dst.rect.x)
+                        if (walls[i].rect.x > player.rect.x)
                         {
-                            player_dst.pos.x = walls[i].rect.x - 63;
+                            player.pos.x = walls[i].rect.x - 63;
                         }
                         else
                         {
-                            player_dst.pos.x = walls[i].rect.x + 23;
+                            player.pos.x = walls[i].rect.x + 23;
                         }
                         
                     }
@@ -788,9 +788,9 @@ int main(int argc, char const *argv[])
                     }	
                 }
 
-                if (check_wall_collision(player_dst.rect) == CollisionType_Bottom)
+                if (check_wall_collision(player.rect) == CollisionType_Bottom)
                 {
-                    player_dst.pos.y = height - 55;
+                    player.pos.y = height - 55;
                 }
                 
 
@@ -807,7 +807,7 @@ int main(int argc, char const *argv[])
                 
                 if (draw_stage_2)
                 {
-                    //player_dst.health = 3;
+                    //player.health = 3;
                     
                     video_blit_bmp(dst, stage_2, transition_data);
                     if (key.right)
@@ -827,12 +827,12 @@ int main(int argc, char const *argv[])
                         enemys_lvl2[i].pos.y = -1920 + enemys_lvl2[i].pos.y + 30;
                         score += 9;
                     }
-                    if (check_collision(enemys_lvl2[i].rect, player_dst.rect))
+                    if (check_collision(enemys_lvl2[i].rect, player.rect))
                     {
                         
                         enemys_lvl2[i].pos.y  = -1920 + enemys_lvl2[i].pos.y + 30;
                         move(&enemys_lvl2[i]);
-                        player_dst.health --;
+                        player.health --;
                         flag_hit = 1;
                     }
                     
@@ -855,18 +855,18 @@ int main(int argc, char const *argv[])
                         walls_level2[i].pos.y = -1920 + walls_level2[i].pos.y + 30;
                         walls_level2_2[i].pos.y = -1920 + walls_level2_2[i].pos.y + 30;
                     }
-                    if (check_collision(walls_level2[i].rect, player_dst.rect))
+                    if (check_collision(walls_level2[i].rect, player.rect))
                     {
-                        player_dst.pos.x = player_dst.pos.x + 3;
+                        player.pos.x = player.pos.x + 3;
                     }
-                    if (check_collision(walls_level2_2[i].rect, player_dst.rect))
+                    if (check_collision(walls_level2_2[i].rect, player.rect))
                     {
-                        player_dst.pos.x = player_dst.pos.x - 3;
+                        player.pos.x = player.pos.x - 3;
                     }
                 }
 
                 
-                if (player_dst.health == 0)
+                if (player.health == 0)
                 {
                     state_3 = 0;
                     state_0 = 1;
@@ -886,27 +886,27 @@ int main(int argc, char const *argv[])
             draw_score(score);
             video_draw_bmp(dst_score, score_word_data);
             
-            if (player_dst.health == 3)
+            if (player.health == 3)
             {
                 video_blit_bmp(dst_health_1, src_health_1, health_graph_data);
                 video_blit_bmp(dst_health_2, src_health_1, health_graph_data);
                 video_blit_bmp(dst_health_3, src_health_1, health_graph_data);
             }
-            if (player_dst.health == 2)
+            if (player.health == 2)
             {
                 video_blit_bmp(dst_health_2, src_health_1, health_graph_data);
                 video_blit_bmp(dst_health_3, src_health_1, health_graph_data);
             }
             
-            if (player_dst.health == 1)
+            if (player.health == 1)
             {
                 video_blit_bmp(dst_health_3, src_health_1, health_graph_data);
             }
 
             
             //siempre tenemos al jugador idenpendientemente del nivel
-            move(&player_dst);     
-            video_blit_bmp(player_dst.rect, player_src, graphics_data);
+            move(&player);     
+            video_blit_bmp(player.rect, player_src, graphics_data);
             
             
 
