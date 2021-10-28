@@ -158,7 +158,7 @@ http://kernelx.weebly.com/getting-keyboard-input.html
 
 int getkey() {
 
-  const int sleep = 700;
+  const int sleep = 700;//700
 
   int key = 0;
   
