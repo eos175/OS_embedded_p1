@@ -4,6 +4,8 @@
 
 Este proyecto consiste en poder utilizar el bootloader para cargar un sistema operativo, en este caso el kernel es un video juego basado en el siguiente video [LEAD](https://www.youtube.com/watch?v=pJuJIqd1Uhw), la idea general es aprender como el bootloader hace toda una serie de pasos para darle el control al kernel y este con todas sus herramientas pre cargadas, de paso a lo que queres ver en nuestro computador. 
 
+[![Video result](https://i.imgur.com/AwE7bzZ.png)](https://www.youtube.com/watch?v=EwG3dfR_G10 "Video result - Click to Watch!"
+
 ### Investigación del bootloader:
 
 Inicialmente se iba a utilizar [Pure64](https://github.com/ReturnInfinity/Pure64) sin embargo, a pesar que funcionaba no se estaba del todo de acuerdo debido a muchisimas cosas como ejemplo: usa [VESA](https://wiki.osdev.org/VESA_Video_Modes) como salida de video, que actualmente se considera obsoleto, además de que presentaba incompatibilidad con los drivers de USB por ende teniamos que buscar la forma de crear este apartado por nuestra cuenta, por lo que añadia complejidad al proyecto, por ende se toma la decision de no utilizarlo a pesar de que nos permitia trabajar en QEMU por ejemplo.
